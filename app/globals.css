@@ -1,8 +1,55 @@
+/* src/app/globals.css */
 @import "tailwindcss";
 
+/* ✅ PREMIUM COLOR VARIABLES - Light & Dark */
 :root {
-  --background: #ffffff;
+  /* Light mode (default) */
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8f9fa;
+  --text-primary: #1a1a1a;
+  --text-secondary: #4a4a4a;
+  --text-muted: #6c757d;
+  --accent-gold: #C9A87C;
+  --accent-gold-light: #E5D5B3;
+  --accent-gold-dark: #B68B5C;
+  --border: #e9ecef;
+  --border-light: #dee2e6;
+  --card-bg: #ffffff;
+  --card-border: #e9ecef;
+  --overlay-light: rgba(0, 0, 0, 0.05);
+  --overlay-dark: rgba(0, 0, 0, 0.1);
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   --foreground: #171717;
+  --background: #ffffff;
+}
+
+/* Dark mode */
+.dark {
+  --bg-primary: #0A0A0A;
+  --bg-secondary: #141414;
+  --text-primary: #ffffff;
+  --text-secondary: #e0e0e0;
+  --text-muted: #a0a0a0;
+  --accent-gold: #C9A87C;
+  --accent-gold-light: #E5D5B3;
+  --accent-gold-dark: #B68B5C;
+  --border: #262626;
+  --border-light: #333333;
+  --card-bg: rgba(255, 255, 255, 0.05);
+  --card-border: rgba(255, 255, 255, 0.1);
+  --overlay-light: rgba(255, 255, 255, 0.05);
+  --overlay-dark: rgba(0, 0, 0, 0.5);
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  --foreground: #ededed;
+  --background: #0a0a0a;
+}
+
+/* System preference dark mode */
+@media (prefers-color-scheme: dark) {
+  :root:not(.light) {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
 }
 
 @theme inline {
@@ -10,13 +57,16 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-accent: var(--accent-gold);
+  --color-accent-light: var(--accent-gold-light);
+  --color-accent-dark: var(--accent-gold-dark);
+  --color-bg-primary: var(--bg-primary);
+  --color-bg-secondary: var(--bg-secondary);
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted: var(--text-muted);
+  --color-border: var(--border);
+  --color-border-light: var(--border-light);
 }
 
 body {
@@ -27,14 +77,13 @@ body {
 
 @layer base {
   * {
-    @apply m-0 p-0 box-border;
+    @apply box-border p-0 m-0;
   }
 
   body {
     @apply antialiased;
   }
 
-  /* Smooth scroll for anchor links */
   html {
     scroll-behavior: smooth;
   }
@@ -42,7 +91,7 @@ body {
 
 @layer components {
   .container-custom {
-    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+    @apply px-4 mx-auto max-w-7xl sm:px-6 lg:px-8;
   }
 
   .section-padding {
@@ -50,19 +99,49 @@ body {
   }
 
   .heading-xl {
-    @apply font-serif text-5xl md:text-6xl lg:text-7xl xl:text-8xl tracking-tight leading-none;
+    @apply font-serif text-5xl leading-none tracking-tight md:text-6xl lg:text-7xl xl:text-8xl;
   }
 
   .heading-lg {
-    @apply font-serif text-4xl md:text-5xl lg:text-6xl tracking-tight;
+    @apply font-serif text-4xl tracking-tight md:text-5xl lg:text-6xl;
   }
 
   .heading-md {
-    @apply font-serif text-3xl md:text-4xl tracking-tight;
+    @apply font-serif text-3xl tracking-tight md:text-4xl;
   }
 
   .gradient-text {
     @apply bg-gradient-to-r from-[#C9A959] to-[#8B6E3C] bg-clip-text text-transparent;
+  }
+  
+  /* ✅ New utility classes */
+  .bg-primary {
+    background-color: var(--bg-primary);
+  }
+  
+  .bg-secondary {
+    background-color: var(--bg-secondary);
+  }
+  
+  .text-primary {
+    color: var(--text-primary);
+  }
+  
+  .text-secondary {
+    color: var(--text-secondary);
+  }
+  
+  .text-muted {
+    color: var(--text-muted);
+  }
+  
+  .border-custom {
+    border-color: var(--border);
+  }
+  
+  .card {
+    background-color: var(--card-bg);
+    border-color: var(--card-border);
   }
 }
 
@@ -89,4 +168,9 @@ body {
 
 .animate-fadeInUp {
   animation: fadeInUp 0.8s ease-out forwards;
+}
+
+/* Smooth transitions */
+* {
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
 }
